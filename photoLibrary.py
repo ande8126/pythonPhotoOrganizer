@@ -4,7 +4,7 @@ class PhotoLibrary:
     photo_library = []
 
     @classmethod
-    def add_photo_to_library(cls, location, date_of_creation, datatype):
-        new_photo = ExifData(location, date_of_creation, datatype)
+    def add_photo_to_library(cls, file_name, date_of_creation, day, month, year, datatype):
+        new_photo = ExifData(file_name, date_of_creation, day, month, year, datatype)
         cls.photo_library.append(new_photo)
     

@@ -1,6 +1,16 @@
-#First open an SSH tunnel to NAS
+from getExifData import *
+
+#First open an SSH connection to NAS
+print("Have you opened your SSH?")
+isOpen = input("Enter 'y' for Yes or 'n' for No:  ")
+
 
 #Get path to folder in question
+if isOpen == "y":
+    path = input("Copy path of the photos in question here:")
+    if path:
+        get_exif_data(path)
+
 
 #Then, get data for photos 
 

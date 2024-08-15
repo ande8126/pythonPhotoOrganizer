@@ -22,7 +22,7 @@ if isOpen == "y":
         print(f"Sorry, path {path} does not exist or is not accessible")
 
 
-
+#This is just for early testing
 for photo in new_photo_library:
     print(photo.file_name)
     print(photo.year)

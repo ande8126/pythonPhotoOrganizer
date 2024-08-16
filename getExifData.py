@@ -1,5 +1,4 @@
 import os 
-import shutil 
 from datetime import datetime 
 from PIL import Image 
 from PIL.ExifTags import TAGS
@@ -35,7 +34,11 @@ def get_datatype(file_name):
         return "photo"
     if file_extension == ".webp":
         return "photo"
+    #if file_extension == ".heic": --Python doesn't like these, can I convert?
+    #    return "photo"
     if file_extension == ".gif":
+        return "photo"
+    if file_extension == ".png":
         return "photo"
     if file_extension == ".mov":
         return "video"

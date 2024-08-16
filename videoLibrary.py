@@ -8,3 +8,6 @@ class VideoLibrary:
         new_video = VideoData(file_name, date_of_creation, day, month, year, datatype)
         cls.video_library.append(new_video)
     
+    @classmethod
+    def clear_library(self):
+        self.video_library = []

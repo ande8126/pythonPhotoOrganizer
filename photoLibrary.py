@@ -8,3 +8,7 @@ class PhotoLibrary:
         new_photo = ExifData(file_name, date_of_creation, day, month, year, datatype)
         cls.photo_library.append(new_photo)
     
+    @classmethod
+    def clear_library(self):
+        self.photo_library = []
+        

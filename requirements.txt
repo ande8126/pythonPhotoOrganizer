@@ -1,0 +1,5 @@
+aiofiles==23.1.0
+exif==1.3.4
+ExifRead==2.3.2
+pillow==10.4.0
+pymediainfo

@@ -1,8 +1,10 @@
 import asyncio
+import os
 from getExifData import *
 from mediaUtils import *
 from getVideoData import *
 from fileCreator import *
+from folderSelect import *
 from photoLibrary import PhotoLibrary
 from videoLibrary import VideoLibrary
 
@@ -16,7 +18,9 @@ async def main():
 
     #Get path to folder in question
     #if isOpen == "y":
-    path = input("Copy path of the photos in question here:")
+    #path = input("Copy path of the photos in question here:")
+    path = os.getenv("FOLDER")
+    
     if path:
         #Once you get the path, first load in file names
         file_names = get_files_names(path)
@@ -35,6 +39,7 @@ async def main():
             VideoLibrary.clear_library()
     else:
         print(f"Sorry, path {path} does not exist or is not accessible")
+        exit(1)
 
 if __name__ == "__main__":
     asyncio.run(main())

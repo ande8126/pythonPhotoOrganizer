@@ -1,8 +1,8 @@
 import os
-import shutil
 import asyncio
 import aiofiles
 import tempfile
+import shutil
 from getExifData import *
 from mediaUtils import *
 from getVideoData import *
@@ -67,21 +67,26 @@ async def move_file(file_name, year, month, datatype_folder, base_path):
     #target_path = await get_target_path(target_directory, just_name) -- this needs work
     target_path = os.path.join(target_directory, just_name)
 
-    #use temp file as a shell for each file to avoid corrupted files in case this breaks during the run
-    temp_file_path = None
+    #Move files to new path (whole)
     if os.path.exists(original_file_path):
-        async with aiofiles.open(original_file_path, 'rb') as src_file:
-            temp_file_fd, temp_file_path = tempfile.mkstemp(dir=target_directory)
-            async with aiofiles.open(temp_file_fd, 'wb') as dest_file:
-                while True:
-                    chunk = await src_file.read(1024 * 1024) #read in chunks
-                    if not chunk:
-                        break
-                    await dest_file.write(chunk)
+        shutil.move(original_file_path, target_path)
 
-        #Update temp file to the final target file
-        os.rename(temp_file_path, target_path)
-        os.remove(original_file_path)
+    ##TODO: Figure out chunking. Failed in some tests, too risky
+    # #use temp file as a shell for each file to avoid corrupted files in case this breaks during the run
+    # temp_file_path = None
+    # if os.path.exists(original_file_path):
+    #     async with aiofiles.open(original_file_path, 'rb') as src_file:
+    #         temp_file_fd, temp_file_path = tempfile.mkstemp(dir=target_directory)
+    #         async with aiofiles.open(temp_file_fd, 'wb') as dest_file:
+    #             while True:
+    #                 chunk = await src_file.read(1024 * 1024) #read in chunks
+    #                 if not chunk:
+    #                     break
+    #                 await dest_file.write(chunk)
+
+    #     #Update temp file to the final target file
+    #     os.rename(temp_file_path, target_path)
+    #     os.remove(original_file_path)
 
         print(f"Moved {file_name} to {target_path}")
     else:

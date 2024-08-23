@@ -61,7 +61,7 @@ async def move_file(file_name, year, month, datatype_folder, base_path):
     target_directory = os.path.join(base_path, year_folder, month_folder, datatype_folder)
 
     os.makedirs(target_directory, exist_ok=True)
-
+    
     original_file_path = file_name
     just_name = os.path.basename(file_name)
     #target_path = await get_target_path(target_directory, just_name) -- this needs work

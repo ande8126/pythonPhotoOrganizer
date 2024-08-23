@@ -13,5 +13,5 @@ Go into a photo library, detect existing photos/videos and automatically sort th
 * Hit enter, watch for notes (I'm leaving some debug writelines in)
 
 ## Next up
-* Hope to add some nominal multithreading to harness the power of my 2018 Macbook, lol
+* Figure out how to run via Docker
 * Otherways to deploy this... can this just sit in photo library somewhere and run if it needs to in the background?

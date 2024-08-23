@@ -6,12 +6,9 @@ Go into a photo library, detect existing photos/videos and automatically sort th
 * Month
 * Filetype(Photo and Video)
 
-## Using the app:
-* Never use python, so I'll just say: you might have to install some of the required frameworks, including 'pillow' 
-* Ignore the opening prompt, just hit 'y' to the SSH q (This app is only working with local drives anyway)
-* Copy in the path to the main file tree
-* Hit enter, watch for notes (I'm leaving some debug writelines in)
+## Using the app: 
+* Add container to Docker with command: docker build -t pythonphotoorganizer .
+* Run via Docker with the command: docker run -v /your/filepath/here:/mnt/data/ pythonphotoorganizer
 
 ## Next up
-* Figure out how to run via Docker
 * Otherways to deploy this... can this just sit in photo library somewhere and run if it needs to in the background?

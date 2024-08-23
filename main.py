@@ -19,7 +19,7 @@ async def main():
     #Get path to folder in question
     #if isOpen == "y":
     #path = input("Copy path of the photos in question here:")
-    path = os.getenv("FOLDER")
+    path = "/mnt/data"
     
     if path:
         #Once you get the path, first load in file names

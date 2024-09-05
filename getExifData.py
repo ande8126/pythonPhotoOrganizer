@@ -6,7 +6,7 @@ from photoLibrary import PhotoLibrary
 
 def get_exif_data(path):
     image = Image.open(path)
-    exif_data = image._getexif()
+    exif_data = image.getexif()
     if exif_data:
         for tag, value in exif_data.items():
             tag_name = TAGS.get(tag, tag)

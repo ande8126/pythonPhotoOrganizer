@@ -1,8 +1,7 @@
 import os
 import asyncio
-import aiofiles
-import tempfile
 import shutil
+from tqdm import tqdm
 from getExifData import *
 from mediaUtils import *
 from getVideoData import *
@@ -32,6 +31,7 @@ async def load_file_libraries(path, file_names):
                 print(f"file {file} does not have a recognized media format")
     
     await asyncio.gather(*tasks)
+
 
 async def organize_photos(path, incoming_photo_library, incoming_video_library):
     tasks = []
@@ -69,7 +69,7 @@ async def move_file(file_name, year, month, datatype_folder, base_path):
 
     #Move files to new path (whole)
     if os.path.exists(original_file_path):
-        shutil.move(original_file_path, target_path)
+        await asyncio.to_thread(shutil.move, original_file_path, target_path)
 
     ##TODO: Figure out chunking. Failed in some tests, too risky
     # #use temp file as a shell for each file to avoid corrupted files in case this breaks during the run
@@ -87,7 +87,5 @@ async def move_file(file_name, year, month, datatype_folder, base_path):
     #     #Update temp file to the final target file
     #     os.rename(temp_file_path, target_path)
     #     os.remove(original_file_path)
-
-        print(f"Moved {file_name} to {target_path}")
     else:
-        print(f"File not found: {original_file_path}")  
+        print(f"File not found: {original_file_path}")

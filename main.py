@@ -1,5 +1,4 @@
 import asyncio
-import os
 from getExifData import *
 from mediaUtils import *
 from getVideoData import *
@@ -23,11 +22,17 @@ async def main():
     
     if path:
         #Once you get the path, first load in file names
+        non_media_files = 0
         file_names = get_files_names(path)
+        total_files = file_names.count
+        moved_files = 0
+        print(f"Loaded {total_files} files to move...")
         batch_size = 1000
+
 
         for i in range(0, len(file_names), batch_size):
             file_batch = file_names[i:i + batch_size]
+            files_to_move = len(file_batch)
 
             await load_file_libraries(path, file_batch)
             batch_photo_library = PhotoLibrary.photo_library
@@ -37,9 +42,15 @@ async def main():
             await organize_photos(path, batch_photo_library, batch_video_library)
             PhotoLibrary.clear_library()
             VideoLibrary.clear_library()
+            moved_files += files_to_move
+            print(f"\rMoving files: {moved_files}/{total_files} completed", end="")
+        
+        unrecognized_files = total_files - moved_files
+        print(f"Finished successfully, {unrecognized_files} files with non-media or unknown extensions")
     else:
-        print(f"Sorry, path {path} does not exist or is not accessible")
         exit(1)
 
 if __name__ == "__main__":
     asyncio.run(main())
+
+

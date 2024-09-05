@@ -11,6 +11,5 @@ def get_video_data(path):
         for track in video.tracks:
             if track.track_type == "General":
                 date_time = track.tagged_date
-                print(date_time)
                 return date_time
     return None

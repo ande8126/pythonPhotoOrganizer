@@ -22,9 +22,9 @@ async def main():
     
     if path:
         #Once you get the path, first load in file names
-        non_media_files = 0
+        print("Loading files from original paths...")
         file_names = get_files_names(path)
-        total_files = file_names.count
+        total_files = len(file_names)
         moved_files = 0
         print(f"Loaded {total_files} files to move...")
         batch_size = 1000
@@ -44,9 +44,8 @@ async def main():
             VideoLibrary.clear_library()
             moved_files += files_to_move
             print(f"\rMoving files: {moved_files}/{total_files} completed", end="")
-        
-        unrecognized_files = total_files - moved_files
-        print(f"Finished successfully, {unrecognized_files} files with non-media or unknown extensions")
+
+        print(f"\n\nFinished successfully")
     else:
         exit(1)
 

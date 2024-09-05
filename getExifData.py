@@ -17,7 +17,6 @@ def get_exif_data(path):
 def get_datatype(file_name):
     _, raw_file_extension = os.path.splitext(file_name)
     file_extension = raw_file_extension.lower()
-    print(file_extension)
     if file_extension == ".jpg":
         return "photo"
     if file_extension == ".jpeg":

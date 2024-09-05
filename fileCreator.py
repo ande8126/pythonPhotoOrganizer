@@ -13,7 +13,7 @@ from videoLibrary import VideoLibrary
 #in the else clause we print to console all files skipped by the program
 
 async def load_file_libraries(path, file_names):
-
+    non_media_files = 0
     tasks = [] #for async
 
     for file in file_names:
@@ -21,15 +21,14 @@ async def load_file_libraries(path, file_names):
         #file_path = (f"{path}/{file}")
         file_path = file
         datatype = get_datatype(file)
-        print(datatype)
 
         if datatype == "photo": 
             tasks.append(add_photo(file_path, file, datatype))
-        if datatype == "video":
+        elif datatype == "video":
             tasks.append(add_video(file_path, file, datatype))
         else:
-                print(f"file {file} does not have a recognized media format")
-    
+                non_media_files += 1
+
     await asyncio.gather(*tasks)
 
 
@@ -53,7 +52,6 @@ async def add_video(file_path, file_name, datatype):
     new_datetime = get_video_data(file_path)
     year, month, day = get_values_from_video_datetime(new_datetime)
     VideoLibrary.add_video_to_library(file_name, new_datetime, day, month, year, datatype)
-    print(new_datetime, year, month, day)
 
 async def move_file(file_name, year, month, datatype_folder, base_path):
     year_folder = str(year)

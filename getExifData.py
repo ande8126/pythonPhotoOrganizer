@@ -5,14 +5,23 @@ from PIL.ExifTags import TAGS
 from photoLibrary import PhotoLibrary
 
 def get_exif_data(path):
-    image = Image.open(path)
-    exif_data = image.getexif()
-    if exif_data:
-        for tag, value in exif_data.items():
-            tag_name = TAGS.get(tag, tag)
-            if tag_name == 'DateTimeOriginal':
-                return value
-    return None
+    if not os.path.exists(path):
+        print(f"File not found: {path}")
+        return None
+
+    try:    
+        image = Image.open(path)
+        exif_data = image.getexif()
+        if exif_data:
+            for tag, value in exif_data.items():
+                tag_name = TAGS.get(tag, tag)
+                if tag_name == 'DateTimeOriginal':
+                    return value
+        return None
+    except Exception as e:
+        print(f"Error with file {path}: {e}")
+        return None
+
 
 def get_datatype(file_name):
     _, raw_file_extension = os.path.splitext(file_name)
